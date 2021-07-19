@@ -14,3 +14,7 @@ Imports:
     dplyr,
     purrr,
     tidycensus
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
