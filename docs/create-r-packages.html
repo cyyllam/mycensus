@@ -241,18 +241,20 @@ div.tocify {
 </div>
 
 
-<p>My toy example can be found here: <a href="https://github.com/cyyllam/mycensus" class="uri">https://github.com/cyyllam/mycensus</a></p>
-<p>Below are a collection of notes and instructions gathered from:</p>
+<p>My toy example and what I will reference throughout this document is here: <a href="https://github.com/cyyllam/mycensus" class="uri">https://github.com/cyyllam/mycensus</a></p>
+<p>This document is a collection of notes and instructions gathered from the following sources:</p>
 <ul>
 <li><a href="https://learn.datacamp.com/courses/developing-r-packages">DataCamp’s tutorial on package creation</a></li>
 <li><a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html" class="uri">https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html</a></li>
 </ul>
 <div id="pre-work" class="section level2">
 <h2>Pre-work</h2>
-<p>Install the packages:</p>
+<p>Creating a package will make use of the following packages:</p>
 <ul>
 <li><code>devtools</code>: contains tools to document, check, test, and install your package.</li>
 <li><code>roxygen2</code>: documentation headers above your functions that will help create R documentation when the user asks for help.</li>
+<li><code>usethis</code>: automates workflow e.g. providing functions to insert information into a file or telling testthat to set up a testing framework for unit testing.</li>
+<li><code>testthat</code>: contains tools e.g. <code>expect_*()</code> to conduct unit tests.</li>
 </ul>
 <p>Depending on what you’re doing, <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> may be required.</p>
 </div>
@@ -312,7 +314,7 @@ utils::globalVariables(&quot;GEOID&quot;)</code></pre>
 <p>Install your package on your computer:</p>
 <pre class="r"><code>devtools::install()
 library(mycensus)</code></pre>
-<p>To distribute your package via Github:</p>
+<p>To distribute your package via Github have others run this command:</p>
 <pre class="r"><code>devtools::install_github(&quot;cyyllam/mycensus&quot;)</code></pre>
 <p>Another way of distributing your package is to create a source file (a <code>.tar.gz</code> file). Use <code>devtools::build()</code> and it will generate a file outside of your package directory (I’m not sure where to store the file though…).</p>
 </div>
@@ -338,7 +340,7 @@ library(mycensus)</code></pre>
 </div>
 <div id="continuous-integration" class="section level2">
 <h2>Continuous Integration</h2>
-<p>Consider using Travis CI (continuous integration) (which I haven’t done yet). Every time code is committed/pushed to Github, the R CMD Check and unit tests will run.</p>
+<p>Consider using Travis CI (continuous integration) (which I haven’t done yet). Every time code is committed/pushed to Github, the R CMD Check and unit tests will automatically run.</p>
 <p>For more reading: <a href="https://juliasilge.com/blog/beginners-guide-to-travis/" class="uri">https://juliasilge.com/blog/beginners-guide-to-travis/</a></p>
 </div>
 <div id="explore" class="section level2">
