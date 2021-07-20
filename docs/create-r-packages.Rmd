@@ -1,0 +1,156 @@
+---
+title: "Creating an R Package"
+output: 
+  html_document:
+    theme: readable
+    toc: true
+    toc_depth: 3
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+My toy example and what I will reference throughout this document is here: https://github.com/cyyllam/mycensus
+
+This document is a collection of notes and instructions gathered from the following sources: 
+
+  - [DataCamp's tutorial on package creation](https://learn.datacamp.com/courses/developing-r-packages)
+  - https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html
+
+## Pre-work
+
+Creating a package will make use of the following packages:  
+
+  - `devtools`: contains tools to document, check, test, and install your package.
+  - `roxygen2`: documentation headers above your functions that will help create R documentation when the user asks for help. 
+  - `usethis`: automates workflow e.g. providing functions to insert information into a file or telling testthat to set up a testing framework for unit testing.
+  - `testthat`: contains tools e.g. `expect_*()` to conduct unit tests.
+
+Depending on what you're doing, [Rtools](https://cran.r-project.org/bin/windows/Rtools/) may be required. 
+
+## Framework Set-up
+
+Create package using RStudio's template. This creates a directory with an .Rproj file so your working directory is already set-up.
+
+- Click on `New R Project` icon > `New Directory` > `New Package`
+
+The name of your package should only contain letters, numbers, or dots.
+
+### Description File
+
+The DESCRIPTION file contains author and maintainer details, package dependencies, and license details.
+
+To add a package dependency, you can use `usethis::use_package()`. It will automatically insert whatever package you provide.
+
+`cre` = maintainer (who should get an email if something goes wrong)
+
+### NAMESPACE File
+
+The NAMESPACE file that exists when you create your package directory is a minimalist file. Delete it! 
+
+This file will be re-created and updated when you run the `devtools::document()` after completing documentation on your functions.
+
+The NAMESPACE file is something that you do not edit by hand. 
+
+## Adding Functions & roxygen
+
+Add functions in one or across multiple R files in the `R` directory.
+
+Place cursor in the body of your function. Use `Ctrl` + `Alt` + `Shift` + `R` to add Roxygen2 commenting structure and edit accordingly.
+
+Examples:
+
+  - See an example from my toy package: [mycensus](https://github.com/cyyllam/mycensus/blob/792c857c91871eaf0d95f513fc0451ef1483b2cf/R/get-decennial-recs.R#L141)
+  - https://github.com/kbroman/pkg_primer/blob/gh-pages/example/stage3/R/brocolors.R
+
+You can run `devtools::document()` to convert scripts with roxygen headers to .Rd files. These are the R Documentation Help files when use `?` or `help()` to check function details.
+
+`@export` is used for functions you want to be made available to the user. It will export the function to the NAMESPACE and when the user starts typing `mycensus::` only exported functions will appear in the intellesense. 
+
+To document the package itself, you can store the following at the top of a script with roxygen headers. It can also be in a separate file.
+
+```{r eval = FALSE}
+#' mycensus: A package for easy compilation of census estimates for the Puget Sound Region.
+#'
+#' This package provides functions to easily collect census estimates across geographies within the
+#' Central Puget Sound region.
+#'
+#' @author Christy Lam \email{clam@psrc.org}
+#' @docType package
+#' @name mycensus
+"_PACKAGE"
+
+utils::globalVariables("GEOID")
+```
+
+Using variable names in dplyr functions may trigger warnings or notes on undefined variables. Use the `globalVariables` at the top of your script(s) to pass the checking stage.
+
+## R CMD Check
+
+Run `devtools::check()` to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.
+
+`check()` will automatically update .Rd files.
+
+## Distribution
+
+After error checking and completing the DESCRIPTION file, add/commit/push to Github.
+
+Install your package on your computer:
+```{r eval = FALSE}
+devtools::install()
+library(mycensus)
+```
+
+To distribute your package via Github have others run this command:
+```{r eval = FALSE}
+devtools::install_github("cyyllam/mycensus")
+```
+
+Another way of distributing your package is to create a source file (a `.tar.gz` file). Use `devtools::build()` and it will generate a file outside of your package directory (I'm not sure where to store the file though...).
+
+## Unit Tests
+
+Set-up test framework using `usethis::use_testthat()`.
+
+Save your tests as .R files in the `tests/testthat/` directory with the prefix `test-`.
+
+Use various `expect_*()` functions to conduct tests.
+
+To group tests (for organization), use the function `testthat::test_that()` like so:
+```{r eval = FALSE}
+testthat::test_that('get_deccenial_recs returns expected results', {
+  df <- mycensus::get_decennial_recs(geography = 'county',
+                                     table_codes = 'PCT013',
+                                     year = 2010)
+
+  # default counties are formatted with 'County, Washington'
+  testthat::expect_equal(unique(df$NAME), c('King County, Washington', 'Kitsap County, Washington', 'Pierce County, Washington', 'Snohomish County, Washington'))
+
+  # default columns from tidycensus are the follow six variables
+  testthat::expect_identical(colnames(df), c('GEOID', 'NAME', 'variable', 'value', 'label', 'concept'))
+
+})
+
+```
+
+To run all tests: `devtools:test()`
+
+## Continuous Integration
+
+Consider using Travis CI (continuous integration) (which I haven't done yet). Every time code is committed/pushed to Github, the R CMD Check and unit tests will automatically run.
+
+For more reading:
+https://juliasilge.com/blog/beginners-guide-to-travis/
+
+## Explore!
+
+```{r eval = FALSE}
+library(mycensus)
+
+# check out the documentation!
+?mycensus
+?get_decennial_recs
+```
+
