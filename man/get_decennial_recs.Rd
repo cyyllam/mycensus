@@ -41,10 +41,10 @@ get_decennial_recs(geography = 'place',
                    year = 2010,
                    fips = c("5363000", "5308850"))
 
- get_decennial_recs(geography = 'msa',
-                    table_codes = c("H001", "P001"),
-                    year = 2010,
-                    fips = c('42660', "28420"))
+get_decennial_recs(geography = 'msa',
+                   table_codes = c("H001", "P001"),
+                   year = 2010,
+                   fips = c('42660', "28420"))
 }
 \author{
 Christy Lam

@@ -151,8 +151,6 @@ get_decennial_place <- function(table_codes, year, fips = NULL, state = 'WA') {
 #' @author Christy Lam
 #'
 #' @return a tibble of decennial estimates by selected geography for selected table codes. Includes variable names.
-#' @export
-#'
 #' @examples
 #' Sys.getenv("CENSUS_API_KEY")
 #' tbl_names <- paste0('PCT020', LETTERS[1:6])
@@ -165,10 +163,11 @@ get_decennial_place <- function(table_codes, year, fips = NULL, state = 'WA') {
 #'                    year = 2010,
 #'                    fips = c("5363000", "5308850"))
 #'
-#'  get_decennial_recs(geography = 'msa',
-#'                     table_codes = c("H001", "P001"),
-#'                     year = 2010,
-#'                     fips = c('42660', "28420"))
+#' get_decennial_recs(geography = 'msa',
+#'                    table_codes = c("H001", "P001"),
+#'                    year = 2010,
+#'                    fips = c('42660', "28420"))
+#' @export
 get_decennial_recs <- function(geography, counties = c('King', 'Kitsap', 'Pierce', 'Snohomish'), table_codes, year,
                                fips = NULL) {
 
