@@ -146,7 +146,7 @@ https://juliasilge.com/blog/beginners-guide-to-travis/
 
 ## Explore!
 
-View the vignette for [mycensus](../vignettes/Introduction.html).
+View the vignette for [mycensus](Introduction.html) using `use_vignette()`, but a better way to document packages might be through the [`pkgdown`](https://pkgdown.r-lib.org/) package.
 
 ```{r eval = FALSE}
 library(mycensus)
