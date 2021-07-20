@@ -146,6 +146,8 @@ https://juliasilge.com/blog/beginners-guide-to-travis/
 
 ## Explore!
 
+View the vignette for [mycensus](../vignettes/Introduction.html).
+
 ```{r eval = FALSE}
 library(mycensus)
 
