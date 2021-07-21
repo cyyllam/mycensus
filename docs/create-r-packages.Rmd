@@ -139,10 +139,10 @@ To run all tests: `devtools:test()`
 
 ## Continuous Integration
 
-Consider using Travis CI (continuous integration) (which I haven't done yet). Every time code is committed/pushed to Github, the R CMD Check and unit tests will automatically run.
+Consider using Travis CI (continuous integration) or `usethis::use_github_actions()` (which I haven't done yet). Every time code is committed/pushed to Github, the R CMD Check and unit tests will automatically run.
 
 For more reading:
-https://juliasilge.com/blog/beginners-guide-to-travis/
+https://juliasilge.com/blog/beginners-guide-to-travis/ (this was written back in 2016) and `use_travis()` is now soft-deprecated. Documentation recommends `usethis::use_github_actions()` for CI.
 
 ## Explore!
 
