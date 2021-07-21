@@ -330,7 +330,7 @@ library(mycensus)</code></pre>
                                      year = 2010)
 
   # default counties are formatted with &#39;County, Washington&#39;
-  testthat::expect_equal(unique(df$NAME), c(&#39;King County, Washington&#39;, &#39;Kitsap County, Washington&#39;, &#39;Pierce County, Washington&#39;, &#39;Snohomish County, Washington&#39;))
+  testthat::expect_identical(unique(df$NAME), c(&#39;King County, Washington&#39;, &#39;Kitsap County, Washington&#39;, &#39;Pierce County, Washington&#39;, &#39;Snohomish County, Washington&#39;))
 
   # default columns from tidycensus are the follow six variables
   testthat::expect_identical(colnames(df), c(&#39;GEOID&#39;, &#39;NAME&#39;, &#39;variable&#39;, &#39;value&#39;, &#39;label&#39;, &#39;concept&#39;))
