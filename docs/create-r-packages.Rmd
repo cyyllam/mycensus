@@ -93,6 +93,11 @@ Run `devtools::check()` to check package for errors, warnings, and notes. Make s
 
 `check()` will automatically update .Rd files.
 
+An error that I got repeatedly was something along the lines of '`<function>` does not appear in namespace'. Even though I added e.g. `@import dplyr` in the roxygen headers. For every function used, I identified the package followed by double colons e.g. `dplyr::filter()`.
+
+See notes from this SO:
+https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace
+
 ## Distribution
 
 After error checking and completing the DESCRIPTION file, add/commit/push to Github.
