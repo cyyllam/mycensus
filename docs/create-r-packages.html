@@ -307,8 +307,9 @@ utils::globalVariables(&quot;GEOID&quot;)</code></pre>
 <h2>R CMD Check</h2>
 <p>Run <code>devtools::check()</code> to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.</p>
 <p><code>check()</code> will automatically update .Rd files.</p>
-<p>An error that I got repeatedly was something along the lines of ‘<code>&lt;function&gt;</code> does not appear in namespace’. Even though I added e.g. <code>@import dplyr</code> in the roxygen headers. For every function used, I identified the package followed by double colons e.g. <code>dplyr::filter()</code>.</p>
-<p>See notes from this SO: <a href="https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace" class="uri">https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace</a></p>
+<p>The check will run the examples listed in your header <code>@examples</code>. Make sure your examples are reproducible! Objects should be created or defined in some way.</p>
+<p>An error that I got repeatedly was something along the lines of ‘<code>&lt;function&gt;</code> undefined’ or ‘<code>&lt;function&gt;</code> can’t be found’. Even though I added e.g. <code>@import dplyr</code> in the roxygen headers. For every function used, I identified the package followed by double colons e.g. <code>dplyr::filter()</code>.</p>
+<p>See comments from Hadley Wickham in this SO: <a href="https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace" class="uri">https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace</a></p>
 </div>
 <div id="distribution" class="section level2">
 <h2>Distribution</h2>
