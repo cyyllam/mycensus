@@ -93,8 +93,8 @@
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <ol style="list-style-type: decimal">
 <li>Open your package’s <code>.Rproj</code> file</li>
-<li>Run <code><a href="https://usethis.r-lib.org/reference/use_pkgdown.html">usethis::use_pkgdown()</a></code> once to configure</li>
-<li>Run <code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> to preview site and before any push to GitHub</li>
+<li>Run <code><a href="https://usethis.r-lib.org/reference/use_pkgdown.html">usethis::use_pkgdown()</a></code> once to configure. This will generate additional files and sub-folders (e.g. <code>docs</code>).</li>
+<li>Run <code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> to preview site and before any push to GitHub. There will be a lot of ancillary files, but check them in. They’re all necessary for GitHub to build the website.</li>
 </ol>
 <p>Any .Rmd in the <code>vignette</code> sub-folder will be automatically converted to an article.</p>
 </div>
@@ -104,7 +104,7 @@
 <ol style="list-style-type: decimal">
 <li>Navigate in GitHub to <code>Settings</code> &gt; <code>Pages</code>
 </li>
-<li>Set the GitHub Pages Source to <code>main</code> &amp; <code>docs</code>
+<li>Set the GitHub Pages Source to <code>main</code> branch &amp; the sub-folder <code>docs</code>
 </li>
 </ol>
 <p>It may take anywhere from 5 mins to 20 mins to see the website.</p>
