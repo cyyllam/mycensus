@@ -87,11 +87,19 @@ utils::globalVariables("GEOID")
 
 Using variable names in dplyr functions may trigger warnings or notes on undefined variables. Use the `globalVariables` at the top of your script(s) to pass the checking stage.
 
+When referencing column names within dplyr functions, use the `.data$` prefix e.g.
+
+```{r eval = FALSE}
+df %>% 
+  dplyr::filter(.data$column_1 == 'x')
+```
+
 ## R CMD Check
 
-Run `devtools::check()` to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.
+Run the following:  
 
-`check()` will automatically update .Rd files.
+1. `devtools::document()`
+2. `devtools::check()` to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.
 
 The check will run the examples listed in your header `@examples`. Make sure your examples are reproducible! Objects should be created or defined in some way.
 
@@ -116,6 +124,19 @@ devtools::install_github("cyyllam/mycensus")
 ```
 
 Another way of distributing your package is to create a source file (a `.tar.gz` file). Use `devtools::build()` and it will generate a file outside of your package directory (I'm not sure where to store the file though...).
+
+## Reviewing and Testing Branch Code
+
+To install a branch version of your package use the following command referencing your package repo and the branch name. 
+```{r eval = FALSE}
+devtools::install_git('https://github.com/cyyllam/mycensus.git', ref = 'my-branch-name')
+```
+
+After installing, check the package description to verify that the `ref` is using the branch version and not main.
+```{r eval = FALSE}
+packageDescription('mycensus')
+```
+
 
 ## Unit Tests
 
@@ -153,7 +174,7 @@ https://juliasilge.com/blog/beginners-guide-to-travis/ (this was written back in
 
 ## Explore!
 
-View the vignette for [mycensus](Introduction.html) using `use_vignette()`, but a better way to document packages might be through the [`pkgdown`](https://pkgdown.r-lib.org/) package.
+View the vignette for [mycensus](Introduction.html) using `use_vignette()`, but a better way to document packages will be through the [`pkgdown`](https://pkgdown.r-lib.org/) package.
 
 ```{r eval = FALSE}
 library(mycensus)

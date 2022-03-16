@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/adding-pkgdown.html">Adding pkgdown to your Package</a>
+    </li>
+    <li>
       <a href="../articles/create-r-packages.html">Creating an R Package</a>
     </li>
     <li>
@@ -158,12 +161,20 @@
 
 <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/globalVariables.html">globalVariables</a></span><span class="op">(</span><span class="st">"GEOID"</span><span class="op">)</span></code></pre></div>
 <p>Using variable names in dplyr functions may trigger warnings or notes on undefined variables. Use the <code>globalVariables</code> at the top of your script(s) to pass the checking stage.</p>
+<p>When referencing column names within dplyr functions, use the <code>.data$</code> prefix e.g.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">column_1</span> <span class="op">==</span> <span class="st">'x'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="r-cmd-check" class="section level2">
 <h2 class="hasAnchor">
 <a href="#r-cmd-check" class="anchor"></a>R CMD Check</h2>
-<p>Run <code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code> to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.</p>
-<p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> will automatically update .Rd files.</p>
+<p>Run the following:</p>
+<ol style="list-style-type: decimal">
+<li><code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code></li>
+<li>
+<code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code> to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.</li>
+</ol>
 <p>The check will run the examples listed in your header <code>@examples</code>. Make sure your examples are reproducible! Objects should be created or defined in some way.</p>
 <p>An error that I got repeatedly was something along the lines of ‘<code>&lt;function&gt;</code> undefined’ or ‘<code>&lt;function&gt;</code> can’t be found’. Even though I added e.g. <code>@import dplyr</code> in the roxygen headers. For every function used, I identified the package followed by double colons e.g. <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>.</p>
 <p>See comments from Hadley Wickham in this SO: <a href="https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace" class="uri">https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace</a></p>
@@ -173,13 +184,23 @@
 <a href="#distribution" class="anchor"></a>Distribution</h2>
 <p>After error checking and completing the DESCRIPTION file, add/commit/push to Github.</p>
 <p>Install your package on your computer:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install.html">install</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mycensus</span><span class="op">)</span></code></pre></div>
 <p>To distribute your package via Github have others run this command:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"cyyllam/mycensus"</span><span class="op">)</span></code></pre></div>
 <p>Another way of distributing your package is to create a source file (a <code>.tar.gz</code> file). Use <code><a href="https://devtools.r-lib.org/reference/build.html">devtools::build()</a></code> and it will generate a file outside of your package directory (I’m not sure where to store the file though…).</p>
+</div>
+<div id="reviewing-and-testing-branch-code" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reviewing-and-testing-branch-code" class="anchor"></a>Reviewing and Testing Branch Code</h2>
+<p>To install a branch version of your package use the following command referencing your package repo and the branch name.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_git</a></span><span class="op">(</span><span class="st">'https://github.com/cyyllam/mycensus.git'</span>, ref <span class="op">=</span> <span class="st">'my-branch-name'</span><span class="op">)</span></code></pre></div>
+<p>After installing, check the package description to verify that the <code>ref</code> is using the branch version and not main.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageDescription</a></span><span class="op">(</span><span class="st">'mycensus'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="unit-tests" class="section level2">
 <h2 class="hasAnchor">
@@ -188,7 +209,7 @@
 <p>Save your tests as .R files in the <code>tests/testthat/</code> directory with the prefix <code>test-</code>.</p>
 <p>Use various <code>expect_*()</code> functions to conduct tests.</p>
 <p>To group tests (for organization), use the function <code><a href="https://testthat.r-lib.org/reference/test_that.html">testthat::test_that()</a></code> like so:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">'get_deccenial_recs returns expected results'</span>, <span class="op">{</span>
   <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">mycensus</span><span class="fu">::</span><span class="fu"><a href="../reference/get_decennial_recs.html">get_decennial_recs</a></span><span class="op">(</span>geography <span class="op">=</span> <span class="st">'county'</span>,
                                      table_codes <span class="op">=</span> <span class="st">'PCT013'</span>,
@@ -212,8 +233,8 @@
 <div id="explore" class="section level2">
 <h2 class="hasAnchor">
 <a href="#explore" class="anchor"></a>Explore!</h2>
-<p>View the vignette for <a href="Introduction.html">mycensus</a> using <code>use_vignette()</code>, but a better way to document packages might be through the <a href="https://pkgdown.r-lib.org/"><code>pkgdown</code></a> package.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>View the vignette for <a href="Introduction.html">mycensus</a> using <code>use_vignette()</code>, but a better way to document packages will be through the <a href="https://pkgdown.r-lib.org/"><code>pkgdown</code></a> package.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mycensus</span><span class="op">)</span>
 
 <span class="co"># check out the documentation!</span>

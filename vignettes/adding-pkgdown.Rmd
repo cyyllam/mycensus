@@ -1,0 +1,31 @@
+---
+title: "Adding pkgdown to your Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Getting started
+
+1. Open your package's `.Rproj` file
+2. Run `usethis::use_pkgdown()` once to configure
+3. Run `pkgdown::build_site()` to preview site and before any push to GitHub
+
+Any .Rmd in the `vignette` sub-folder will be automatically converted to an article.
+
+## Activate GitHub Pages:
+
+1. Navigate in GitHub to `Settings` > `Pages`
+2. Set the GitHub Pages Source to `main` & `docs`
+
+It may take anywhere from 5 mins to 20 mins to see the website.
+
+## Additional Information
+
+https://pkgdown.r-lib.org/articles/pkgdown.html
