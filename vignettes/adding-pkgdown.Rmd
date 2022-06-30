@@ -2,7 +2,7 @@
 title: "Adding pkgdown to your Package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction}
+  %\VignetteIndexEntry{adding-pkgdown}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,8 +21,18 @@ Any .Rmd in the `vignette` sub-folder will be automatically converted to an arti
 
 ## Activate GitHub Pages:
 
-1. Navigate in GitHub to `Settings` > `Pages`
-2. Set the GitHub Pages Source to `main` branch & the sub-folder `docs`
+There are two methods:
+
+1. Using packages to build the site
+
+```{r eval=FALSE}
+usethis::use_pkgdown_github_pages()
+pkgdown::build_site_github_pages()
+```
+
+2. A more manual way
+    1. Navigate in GitHub to `Settings` > `Pages`
+    2. Set the GitHub Pages Source to `main` branch & the sub-folder `docs`
 
 It may take anywhere from 5 mins to 20 mins to see the website.
 
