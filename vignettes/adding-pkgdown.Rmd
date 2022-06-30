@@ -14,25 +14,27 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Getting started
 
 1. Open your package's `.Rproj` file
+
+### Option 1
+
 2. Run `usethis::use_pkgdown()` once to configure. This will generate additional files and sub-folders (e.g. `docs`).
 3. Run `pkgdown::build_site()` to preview site and before any push to GitHub. There will be a lot of ancillary files, but check them in. They're all necessary for GitHub to build the website.
 
-Any .Rmd in the `vignette` sub-folder will be automatically converted to an article.
+### Option 2
 
-## Activate GitHub Pages:
-
-There are two methods:
-
-1. Using packages to build the site
+With this option, you don't need to activate Github Pages (in the next section) because it'll already be done.
 
 ```{r eval=FALSE}
 usethis::use_pkgdown_github_pages()
 pkgdown::build_site_github_pages()
 ```
 
-2. A more manual way
-    1. Navigate in GitHub to `Settings` > `Pages`
-    2. Set the GitHub Pages Source to `main` branch & the sub-folder `docs`
+Any .Rmd in the `vignette` sub-folder will be automatically converted to an article.
+
+## Activate GitHub Pages:
+
+1. Navigate in GitHub to `Settings` > `Pages`
+2. Set the GitHub Pages Source to `main` branch & the sub-folder `docs`
 
 It may take anywhere from 5 mins to 20 mins to see the website.
 

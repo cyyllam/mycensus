@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mycensus</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -75,7 +71,7 @@
 
       
 
-      </header><script src="create-r-packages_files/header-attrs-2.6.6/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating an R Package</h1>
@@ -88,158 +84,217 @@
 
     
     
-<p>My toy example and what I will reference throughout this document is here: <a href="https://github.com/cyyllam/mycensus" class="uri">https://github.com/cyyllam/mycensus</a></p>
-<p>This document is a collection of notes and instructions gathered from the following sources:</p>
+<p>My toy example and what I will reference throughout this document is
+here: <a href="https://github.com/cyyllam/mycensus" class="external-link uri">https://github.com/cyyllam/mycensus</a></p>
+<p>This document is a collection of notes and instructions gathered from
+the following sources:</p>
 <ul>
-<li><a href="https://learn.datacamp.com/courses/developing-r-packages">DataCamp’s tutorial on package creation</a></li>
-<li><a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html" class="uri">https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html</a></li>
+<li><a href="https://learn.datacamp.com/courses/developing-r-packages" class="external-link">DataCamp’s
+tutorial on package creation</a></li>
+<li><a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html" class="external-link uri">https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html</a></li>
 </ul>
-<div id="pre-work" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pre-work" class="anchor"></a>Pre-work</h2>
+<div class="section level2">
+<h2 id="pre-work">Pre-work<a class="anchor" aria-label="anchor" href="#pre-work"></a>
+</h2>
 <p>Creating a package will make use of the following packages:</p>
 <ul>
 <li>
-<code>devtools</code>: contains tools to document, check, test, and install your package.</li>
+<code>devtools</code>: contains tools to document, check, test, and
+install your package.</li>
 <li>
-<code>roxygen2</code>: documentation headers above your functions that will help create R documentation when the user asks for help.</li>
+<code>roxygen2</code>: documentation headers above your functions
+that will help create R documentation when the user asks for help.</li>
 <li>
-<code>usethis</code>: automates workflow e.g. providing functions to insert information into a file or telling testthat to set up a testing framework for unit testing.</li>
+<code>usethis</code>: automates workflow e.g. providing functions to
+insert information into a file or telling testthat to set up a testing
+framework for unit testing.</li>
 <li>
-<code>testthat</code>: contains tools e.g. <code>expect_*()</code> to conduct unit tests.</li>
+<code>testthat</code>: contains tools e.g. <code>expect_*()</code>
+to conduct unit tests.</li>
 </ul>
-<p>Depending on what you’re doing, <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> may be required.</p>
+<p>Depending on what you’re doing, <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">Rtools</a> may be
+required.</p>
 </div>
-<div id="framework-set-up" class="section level2">
-<h2 class="hasAnchor">
-<a href="#framework-set-up" class="anchor"></a>Framework Set-up</h2>
-<p>Create package using RStudio’s template. This creates a directory with an .Rproj file so your working directory is already set-up.</p>
+<div class="section level2">
+<h2 id="framework-set-up">Framework Set-up<a class="anchor" aria-label="anchor" href="#framework-set-up"></a>
+</h2>
+<p>Create package using RStudio’s template. This creates a directory
+with an .Rproj file so your working directory is already set-up.</p>
 <ul>
-<li>Click on <code>New R Project</code> icon &gt; <code>New Directory</code> &gt; <code>New Package</code>
+<li>Click on <code>New R Project</code> icon &gt;
+<code>New Directory</code> &gt; <code>New Package</code>
 </li>
 </ul>
-<p>The name of your package should only contain letters, numbers, or dots.</p>
-<div id="description-file" class="section level3">
-<h3 class="hasAnchor">
-<a href="#description-file" class="anchor"></a>Description File</h3>
-<p>The DESCRIPTION file contains author and maintainer details, package dependencies, and license details.</p>
-<p>To add a package dependency, you can use <code><a href="https://usethis.r-lib.org/reference/use_package.html">usethis::use_package()</a></code>. It will automatically insert whatever package you provide.</p>
-<p><code>cre</code> = maintainer (who should get an email if something goes wrong)</p>
+<p>The name of your package should only contain letters, numbers, or
+dots.</p>
+<div class="section level3">
+<h3 id="description-file">Description File<a class="anchor" aria-label="anchor" href="#description-file"></a>
+</h3>
+<p>The DESCRIPTION file contains author and maintainer details, package
+dependencies, and license details.</p>
+<p>To add a package dependency, you can use
+<code><a href="https://usethis.r-lib.org/reference/use_package.html" class="external-link">usethis::use_package()</a></code>. It will automatically insert
+whatever package you provide.</p>
+<p><code>cre</code> = maintainer (who should get an email if something
+goes wrong)</p>
 </div>
-<div id="namespace-file" class="section level3">
-<h3 class="hasAnchor">
-<a href="#namespace-file" class="anchor"></a>NAMESPACE File</h3>
-<p>The NAMESPACE file that exists when you create your package directory is a minimalist file. Delete it!</p>
-<p>This file will be re-created and updated when you run the <code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code> after completing documentation on your functions.</p>
+<div class="section level3">
+<h3 id="namespace-file">NAMESPACE File<a class="anchor" aria-label="anchor" href="#namespace-file"></a>
+</h3>
+<p>The NAMESPACE file that exists when you create your package directory
+is a minimalist file. Delete it!</p>
+<p>This file will be re-created and updated when you run the
+<code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> after completing documentation on your
+functions.</p>
 <p>The NAMESPACE file is something that you do not edit by hand.</p>
 </div>
 </div>
-<div id="adding-functions-roxygen" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-functions-roxygen" class="anchor"></a>Adding Functions &amp; roxygen</h2>
-<p>Add functions in one or across multiple R files in the <code>R</code> directory.</p>
-<p>Place cursor in the body of your function. Use <code>Ctrl</code> + <code>Alt</code> + <code>Shift</code> + <code>R</code> to add Roxygen2 commenting structure and edit accordingly.</p>
+<div class="section level2">
+<h2 id="adding-functions-roxygen">Adding Functions &amp; roxygen<a class="anchor" aria-label="anchor" href="#adding-functions-roxygen"></a>
+</h2>
+<p>Add functions in one or across multiple R files in the <code>R</code>
+directory.</p>
+<p>Place cursor in the body of your function. Use <code>Ctrl</code> +
+<code>Alt</code> + <code>Shift</code> + <code>R</code> to add Roxygen2
+commenting structure and edit accordingly.</p>
 <p>Examples:</p>
 <ul>
-<li>See an example from my toy package: <a href="https://github.com/cyyllam/mycensus/blob/792c857c91871eaf0d95f513fc0451ef1483b2cf/R/get-decennial-recs.R#L141">mycensus</a>
+<li>See an example from my toy package: <a href="https://github.com/cyyllam/mycensus/blob/792c857c91871eaf0d95f513fc0451ef1483b2cf/R/get-decennial-recs.R#L141" class="external-link">mycensus</a>
 </li>
-<li><a href="https://github.com/kbroman/pkg_primer/blob/gh-pages/example/stage3/R/brocolors.R" class="uri">https://github.com/kbroman/pkg_primer/blob/gh-pages/example/stage3/R/brocolors.R</a></li>
+<li><a href="https://github.com/kbroman/pkg_primer/blob/gh-pages/example/stage3/R/brocolors.R" class="external-link uri">https://github.com/kbroman/pkg_primer/blob/gh-pages/example/stage3/R/brocolors.R</a></li>
 </ul>
-<p>You can run <code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code> to convert scripts with roxygen headers to .Rd files. These are the R Documentation Help files when use <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code> or <code>help()</code> to check function details.</p>
-<p><code>@export</code> is used for functions you want to be made available to the user. It will export the function to the NAMESPACE and when the user starts typing <code>mycensus::</code> only exported functions will appear in the intellesense.</p>
-<p>To document the package itself, you can store the following at the top of a script with roxygen headers. It can also be in a separate file.</p>
+<p>You can run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> to convert scripts with
+roxygen headers to .Rd files. These are the R Documentation Help files
+when use <code>?</code> or <code><a href="https://rdrr.io/r/utils/help.html" class="external-link">help()</a></code> to check function
+details.</p>
+<p><code>@export</code> is used for functions you want to be made
+available to the user. It will export the function to the NAMESPACE and
+when the user starts typing <code>mycensus::</code> only exported
+functions will appear in the intellesense.</p>
+<p>To document the package itself, you can store the following at the
+top of a script with roxygen headers. It can also be in a separate
+file.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' mycensus: A package for easy compilation of census estimates for the Puget Sound Region.</span>
-<span class="co">#'</span>
-<span class="co">#' This package provides functions to easily collect census estimates across geographies within the</span>
-<span class="co">#' Central Puget Sound region.</span>
-<span class="co">#'</span>
-<span class="co">#' @author Christy Lam \email{clam@psrc.org}</span>
-<span class="co">#' @docType package</span>
-<span class="co">#' @name mycensus</span>
-<span class="st">"_PACKAGE"</span>
-
-<span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/globalVariables.html">globalVariables</a></span><span class="op">(</span><span class="st">"GEOID"</span><span class="op">)</span></code></pre></div>
-<p>Using variable names in dplyr functions may trigger warnings or notes on undefined variables. Use the <code>globalVariables</code> at the top of your script(s) to pass the checking stage.</p>
-<p>When referencing column names within dplyr functions, use the <code>.data$</code> prefix e.g.</p>
+<code class="sourceCode R"><span><span class="co">#' mycensus: A package for easy compilation of census estimates for the Puget Sound Region.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' This package provides functions to easily collect census estimates across geographies within the</span></span>
+<span><span class="co">#' Central Puget Sound region.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @author Christy Lam \email{clam@psrc.org}</span></span>
+<span><span class="co">#' @docType package</span></span>
+<span><span class="co">#' @name mycensus</span></span>
+<span><span class="st">"_PACKAGE"</span></span>
+<span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/globalVariables.html" class="external-link">globalVariables</a></span><span class="op">(</span><span class="st">"GEOID"</span><span class="op">)</span></span></code></pre></div>
+<p>Using variable names in dplyr functions may trigger warnings or notes
+on undefined variables. Use the <code>globalVariables</code> at the top
+of your script(s) to pass the checking stage.</p>
+<p>When referencing column names within dplyr functions, use the
+<code>.data$</code> prefix e.g.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">column_1</span> <span class="op">==</span> <span class="st">'x'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">.data</span><span class="op">$</span><span class="va">column_1</span> <span class="op">==</span> <span class="st">'x'</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="r-cmd-check" class="section level2">
-<h2 class="hasAnchor">
-<a href="#r-cmd-check" class="anchor"></a>R CMD Check</h2>
+<div class="section level2">
+<h2 id="r-cmd-check">R CMD Check<a class="anchor" aria-label="anchor" href="#r-cmd-check"></a>
+</h2>
 <p>Run the following:</p>
 <ol style="list-style-type: decimal">
-<li><code><a href="https://devtools.r-lib.org/reference/document.html">devtools::document()</a></code></li>
+<li><code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code></li>
 <li>
-<code><a href="https://devtools.r-lib.org/reference/check.html">devtools::check()</a></code> to check package for errors, warnings, and notes. Make sure to resolve all errors at the very least before moving on.</li>
+<code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code> to check package for errors,
+warnings, and notes. Make sure to resolve all errors at the very least
+before moving on.</li>
 </ol>
-<p>The check will run the examples listed in your header <code>@examples</code>. Make sure your examples are reproducible! Objects should be created or defined in some way.</p>
-<p>An error that I got repeatedly was something along the lines of ‘<code>&lt;function&gt;</code> undefined’ or ‘<code>&lt;function&gt;</code> can’t be found’. Even though I added e.g. <code>@import dplyr</code> in the roxygen headers. For every function used, I identified the package followed by double colons e.g. <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>.</p>
-<p>See comments from Hadley Wickham in this SO: <a href="https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace" class="uri">https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace</a></p>
+<p>The check will run the examples listed in your header
+<code>@examples</code>. Make sure your examples are reproducible!
+Objects should be created or defined in some way.</p>
+<p>An error that I got repeatedly was something along the lines of
+‘<code>&lt;function&gt;</code> undefined’ or
+‘<code>&lt;function&gt;</code> can’t be found’. Even though I added
+e.g. <code>@import dplyr</code> in the roxygen headers. For every
+function used, I identified the package followed by double colons
+e.g. <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter()</a></code>.</p>
+<p>See comments from Hadley Wickham in this SO: <a href="https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace" class="external-link uri">https://stackoverflow.com/questions/35750967/r-roxygen2-imported-packages-do-not-appear-in-namespace</a></p>
 </div>
-<div id="distribution" class="section level2">
-<h2 class="hasAnchor">
-<a href="#distribution" class="anchor"></a>Distribution</h2>
-<p>After error checking and completing the DESCRIPTION file, add/commit/push to Github.</p>
+<div class="section level2">
+<h2 id="distribution">Distribution<a class="anchor" aria-label="anchor" href="#distribution"></a>
+</h2>
+<p>After error checking and completing the DESCRIPTION file,
+add/commit/push to Github.</p>
 <p>Install your package on your computer:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install.html">install</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mycensus</span><span class="op">)</span></code></pre></div>
-<p>To distribute your package via Github have others run this command:</p>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mycensus</span><span class="op">)</span></span></code></pre></div>
+<p>To distribute your package via Github have others run this
+command:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"cyyllam/mycensus"</span><span class="op">)</span></code></pre></div>
-<p>Another way of distributing your package is to create a source file (a <code>.tar.gz</code> file). Use <code><a href="https://devtools.r-lib.org/reference/build.html">devtools::build()</a></code> and it will generate a file outside of your package directory (I’m not sure where to store the file though…).</p>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cyyllam/mycensus"</span><span class="op">)</span></span></code></pre></div>
+<p>Another way of distributing your package is to create a source file
+(a <code>.tar.gz</code> file). Use <code><a href="https://devtools.r-lib.org/reference/build.html" class="external-link">devtools::build()</a></code> and it
+will generate a file outside of your package directory (I’m not sure
+where to store the file though…).</p>
 </div>
-<div id="reviewing-and-testing-branch-code" class="section level2">
-<h2 class="hasAnchor">
-<a href="#reviewing-and-testing-branch-code" class="anchor"></a>Reviewing and Testing Branch Code</h2>
-<p>To install a branch version of your package use the following command referencing your package repo and the branch name.</p>
+<div class="section level2">
+<h2 id="reviewing-and-testing-branch-code">Reviewing and Testing Branch Code<a class="anchor" aria-label="anchor" href="#reviewing-and-testing-branch-code"></a>
+</h2>
+<p>To install a branch version of your package use the following command
+referencing your package repo and the branch name.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_git</a></span><span class="op">(</span><span class="st">'https://github.com/cyyllam/mycensus.git'</span>, ref <span class="op">=</span> <span class="st">'my-branch-name'</span><span class="op">)</span></code></pre></div>
-<p>After installing, check the package description to verify that the <code>ref</code> is using the branch version and not main.</p>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_git.html" class="external-link">install_git</a></span><span class="op">(</span><span class="st">'https://github.com/cyyllam/mycensus.git'</span>, ref <span class="op">=</span> <span class="st">'my-branch-name'</span><span class="op">)</span></span></code></pre></div>
+<p>After installing, check the package description to verify that the
+<code>ref</code> is using the branch version and not main.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageDescription</a></span><span class="op">(</span><span class="st">'mycensus'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageDescription</a></span><span class="op">(</span><span class="st">'mycensus'</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="unit-tests" class="section level2">
-<h2 class="hasAnchor">
-<a href="#unit-tests" class="anchor"></a>Unit Tests</h2>
-<p>Set-up test framework using <code><a href="https://usethis.r-lib.org/reference/use_testthat.html">usethis::use_testthat()</a></code>.</p>
-<p>Save your tests as .R files in the <code>tests/testthat/</code> directory with the prefix <code>test-</code>.</p>
+<div class="section level2">
+<h2 id="unit-tests">Unit Tests<a class="anchor" aria-label="anchor" href="#unit-tests"></a>
+</h2>
+<p>Set-up test framework using <code><a href="https://usethis.r-lib.org/reference/use_testthat.html" class="external-link">usethis::use_testthat()</a></code>.</p>
+<p>Save your tests as .R files in the <code>tests/testthat/</code>
+directory with the prefix <code>test-</code>.</p>
 <p>Use various <code>expect_*()</code> functions to conduct tests.</p>
-<p>To group tests (for organization), use the function <code><a href="https://testthat.r-lib.org/reference/test_that.html">testthat::test_that()</a></code> like so:</p>
+<p>To group tests (for organization), use the function
+<code><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">testthat::test_that()</a></code> like so:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html">test_that</a></span><span class="op">(</span><span class="st">'get_deccenial_recs returns expected results'</span>, <span class="op">{</span>
-  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">mycensus</span><span class="fu">::</span><span class="fu"><a href="../reference/get_decennial_recs.html">get_decennial_recs</a></span><span class="op">(</span>geography <span class="op">=</span> <span class="st">'county'</span>,
-                                     table_codes <span class="op">=</span> <span class="st">'PCT013'</span>,
-                                     year <span class="op">=</span> <span class="fl">2010</span><span class="op">)</span>
-
-  <span class="co"># default counties are formatted with 'County, Washington'</span>
-  <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">NAME</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'King County, Washington'</span>, <span class="st">'Kitsap County, Washington'</span>, <span class="st">'Pierce County, Washington'</span>, <span class="st">'Snohomish County, Washington'</span><span class="op">)</span><span class="op">)</span>
-
-  <span class="co"># default columns from tidycensus are the follow six variables</span>
-  <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html">expect_identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'GEOID'</span>, <span class="st">'NAME'</span>, <span class="st">'variable'</span>, <span class="st">'value'</span>, <span class="st">'label'</span>, <span class="st">'concept'</span><span class="op">)</span><span class="op">)</span>
-
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">'get_deccenial_recs returns expected results'</span>, <span class="op">{</span></span>
+<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">mycensus</span><span class="fu">::</span><span class="fu"><a href="../reference/get_decennial_recs.html">get_decennial_recs</a></span><span class="op">(</span>geography <span class="op">=</span> <span class="st">'county'</span>,</span>
+<span>                                     table_codes <span class="op">=</span> <span class="st">'PCT013'</span>,</span>
+<span>                                     year <span class="op">=</span> <span class="fl">2010</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># default counties are formatted with 'County, Washington'</span></span>
+<span>  <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html" class="external-link">expect_identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">NAME</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'King County, Washington'</span>, <span class="st">'Kitsap County, Washington'</span>, <span class="st">'Pierce County, Washington'</span>, <span class="st">'Snohomish County, Washington'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># default columns from tidycensus are the follow six variables</span></span>
+<span>  <span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html" class="external-link">expect_identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'GEOID'</span>, <span class="st">'NAME'</span>, <span class="st">'variable'</span>, <span class="st">'value'</span>, <span class="st">'label'</span>, <span class="st">'concept'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>To run all tests: <code>devtools:test()</code></p>
 </div>
-<div id="continuous-integration" class="section level2">
-<h2 class="hasAnchor">
-<a href="#continuous-integration" class="anchor"></a>Continuous Integration</h2>
-<p>Consider using Travis CI (continuous integration) or <code><a href="https://usethis.r-lib.org/reference/github_actions.html">usethis::use_github_actions()</a></code> (which I haven’t done yet). Every time code is committed/pushed to Github, the R CMD Check and unit tests will automatically run.</p>
-<p>For more reading: <a href="https://juliasilge.com/blog/beginners-guide-to-travis/" class="uri">https://juliasilge.com/blog/beginners-guide-to-travis/</a> (this was written back in 2016) and <code>use_travis()</code> is now soft-deprecated. Documentation recommends <code><a href="https://usethis.r-lib.org/reference/github_actions.html">usethis::use_github_actions()</a></code> for CI.</p>
+<div class="section level2">
+<h2 id="continuous-integration">Continuous Integration<a class="anchor" aria-label="anchor" href="#continuous-integration"></a>
+</h2>
+<p>Consider using Travis CI (continuous integration) or
+<code><a href="https://usethis.r-lib.org/reference/github_actions.html" class="external-link">usethis::use_github_actions()</a></code> (which I haven’t done yet).
+Every time code is committed/pushed to Github, the R CMD Check and unit
+tests will automatically run.</p>
+<p>For more reading: <a href="https://juliasilge.com/blog/beginners-guide-to-travis/" class="external-link uri">https://juliasilge.com/blog/beginners-guide-to-travis/</a>
+(this was written back in 2016) and <code>use_travis()</code> is now
+soft-deprecated. Documentation recommends
+<code><a href="https://usethis.r-lib.org/reference/github_actions.html" class="external-link">usethis::use_github_actions()</a></code> for CI.</p>
 </div>
-<div id="explore" class="section level2">
-<h2 class="hasAnchor">
-<a href="#explore" class="anchor"></a>Explore!</h2>
-<p>View the vignette for <a href="Introduction.html">mycensus</a> using <code>use_vignette()</code>, but a better way to document packages will be through the <a href="https://pkgdown.r-lib.org/"><code>pkgdown</code></a> package.</p>
+<div class="section level2">
+<h2 id="explore">Explore!<a class="anchor" aria-label="anchor" href="#explore"></a>
+</h2>
+<p>View the vignette for <a href="Introduction.html">mycensus</a> using
+<code>use_vignette()</code>, but a better way to document packages will
+be through the <a href="https://pkgdown.r-lib.org/" class="external-link"><code>pkgdown</code></a> package.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mycensus</span><span class="op">)</span>
-
-<span class="co"># check out the documentation!</span>
-<span class="op">?</span><span class="va">mycensus</span>
-<span class="op">?</span><span class="va">get_decennial_recs</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mycensus</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># check out the documentation!</span></span>
+<span><span class="op">?</span><span class="va">mycensus</span></span>
+<span><span class="op">?</span><span class="va">get_decennial_recs</span></span></code></pre></div>
 </div>
   </div>
 
@@ -254,11 +309,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Christy Lam.</p>
+  <p></p>
+<p>Developed by Christy Lam.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>
@@ -266,6 +323,8 @@
 
   
 
+
+  
 
   </body>
 </html>
