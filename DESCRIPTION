@@ -1,6 +1,7 @@
 Package: mycensus
 Type: Package
 Title: Summarize Census Data for Use at PSRC
+URL: https://cyyllam.github.io/mycensus
 Version: 0.1.0
 Author: Christy Lam
 Maintainer: Christy Lam <clam@psrc.org>
@@ -9,7 +10,7 @@ Description: Various functions to generate estimates for geographies in the Cent
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.2
 Imports: 
     dplyr,
     purrr,

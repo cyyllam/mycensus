@@ -1,42 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/404.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/articles/adding-pkgdown.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/articles/create-r-packages.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/articles/Introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/reference/get_decennial_msa.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/reference/get_decennial_place.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/reference/get_decennial_recs.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/reference/get_decennial_tract_county.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cyyllam.github.io/mycensus/reference/mycensus.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://cyyllam.github.io/mycensus/404.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/articles/adding-pkgdown.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/articles/create-r-packages.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/articles/debug-packages.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/articles/index.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/articles/Introduction.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/authors.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/index.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/get_decennial_msa.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/get_decennial_place.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/get_decennial_recs.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/get_decennial_tract_county.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/index.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/mycensus.html</loc></url>
+<url><loc>https://cyyllam.github.io/mycensus/reference/reg_dec_pct020af.html</loc></url>
 </urlset>
+

@@ -1,0 +1,22 @@
+---
+title: "Debugging Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Debugging Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To debug a package:
+
+1. Place `browser()` within a function in the package
+2. Run `devtools::load_all()`
+3. Run a script calling the function
+4. If the script in #3 is saved in the package directory, remember to comment out all lines of code before running `devtools::load_all()`

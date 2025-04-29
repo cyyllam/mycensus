@@ -45,12 +45,14 @@ utils::globalVariables("GEOID")
 #'                            counties = c('King'),
 #'                            table_codes = tbl_names[1],
 #'                            year = 2010)
+#' @export
 get_decennial_tract_county <- function(geography, counties = c('King', 'Kitsap', 'Pierce', 'Snohomish'),
                                        table_codes, year, state = 'WA') {
   get_decennial_geogs <- purrr::partial(tidycensus::get_decennial,
-                                 geography = geography,
-                                 state = state,
-                                 table = table)
+                                        year = year,
+                                        geography = geography,
+                                        state = state,
+                                        table = table)
   dfs <- NULL
   for(table in table_codes) {
 
@@ -83,14 +85,16 @@ get_decennial_tract_county <- function(geography, counties = c('King', 'Kitsap',
 #' get_decennial_msa(table_codes = c("H001", "P001"), year = 2010, fips = c('42660', "28420"))
 #'
 #' get_decennial_msa(table_codes = c("H001"), year = 2010, fips = c('42660'))
+#' @export
 get_decennial_msa <- function(table_codes, year, fips = NULL) {
   msa_geog <- 'metropolitan statistical area/micropolitan statistical area'
 
   dfs <- NULL
   for(table_code in table_codes) {
     df <- tidycensus::get_decennial(geography = msa_geog,
-                        state = NULL,
-                        table = table_code)
+                                    year = year,
+                                    state = NULL,
+                                    table = table_code)
     ifelse(is.null(dfs), dfs <- df, dfs <- dplyr::bind_rows(dfs, df))
   }
 
@@ -124,12 +128,14 @@ get_decennial_msa <- function(table_codes, year, fips = NULL) {
 #' get_decennial_place(table_codes = c('PCT013', 'PCT022'),
 #'                     year = 2010,
 #'                     fips = c("5363000", "5308850"))
+#' @export
 get_decennial_place <- function(table_codes, year, fips = NULL, state = 'WA') {
   dfs <- NULL
   for(table_code in table_codes) {
     df <- tidycensus::get_decennial(geography = 'place',
-                        state = state,
-                        table = table_code)
+                                    year = year,
+                                    state = state,
+                                    table = table_code)
     ifelse(is.null(dfs), dfs <- df, dfs <- dplyr::bind_rows(dfs, df))
   }
 

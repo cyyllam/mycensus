@@ -2,12 +2,19 @@
 % Please edit documentation in R/get-decennial-recs.R
 \docType{package}
 \name{mycensus}
-\alias{mycensus}
 \alias{mycensus-package}
+\alias{mycensus}
 \title{mycensus: A package for easy compilation of census estimates for the Puget Sound Region.}
 \description{
 This package provides functions to easily collect census estimates across geographies within the
 Central Puget Sound region.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://cyyllam.github.io/mycensus}
+}
+
 }
 \author{
 Christy Lam \email{clam@psrc.org}

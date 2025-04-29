@@ -6,6 +6,10 @@ output:
     toc: true
     toc_depth: 3
     toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Creating an R Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
